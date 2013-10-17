@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  #authorization
+    if isAllowed
+      span(style="color:green;") The app is allowed
+    else
+      span(style="color:red;")
+          a(href="https://api.summerofcontext.com/oauth2/authorize?response_type=code&client_id=52602d09dba96ccc0b000007&state=123&scope=all&redirect_uri=https://192.168.0.233:3000") The app is not allowed
+
+
