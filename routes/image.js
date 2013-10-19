@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var uuid = require('node-uuid');
 var ExifImage = require('exif').ExifImage;
+var images = require('../utils/images')
 
 if (fs.existsSync('./keys/api')) {
   // TODO
@@ -12,7 +13,10 @@ if (fs.existsSync('./keys/api')) {
  */
 
 exports.list = function (req, res) {
-  res.render('images');
+  images.getImages(function(results){
+    results = results.map(images.addInfoToImage)
+    res.json(200, {images:results});
+  })
 };
 
 exports.save = function (req, res) {
@@ -26,7 +30,7 @@ exports.save = function (req, res) {
       res.json({error: err})
     }
     console.log("Upload completed!");
-    res.json(202, {url: targetPath })
+    res.json(202, {id: filename })
     readExif(filename)
   });
 };
@@ -65,7 +69,7 @@ function saveInfo(file, data) {
 }
 
 function writeStatus(file, status) {
-  var info = require('./uploads/' + file);
+  var info = require('./uploads/' + file + '.json');
   info.status = status;
   saveInfo(file, info)
 }

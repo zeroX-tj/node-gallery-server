@@ -1,6 +1,7 @@
 var fs = require('fs');
 var https = require("https")
 var querystring = require('querystring');
+var images = require('../utils/images')
 /*
  * GET home page.
  */
@@ -87,16 +88,8 @@ function returnAllowed(response) {
   if (fs.existsSync("./keys/api")) {
     allowed = true;
   }
-  getImages(function(images){
+  images.getImages(function(images){
     console.log(images)
     response.render('index', { title: 'node-gallery', isAllowed: allowed, images: images });
-  })
-}
-
-function getImages(callback){
-  fs.readdir('./uploads/',function(err,files){
-    if (err||!files) callback([])
-    files = files.filter(function(file) { return file.substr(-4) != 'json' })
-    return callback(files)
   })
 }
