@@ -15,7 +15,7 @@ if (fs.existsSync('./keys/api')) {
 exports.list = function (req, res) {
   images.getImages(function(results){
     results = results.map(images.addInfoToImage)
-    res.json(200, {images:results});
+    res.json(200, results);
   })
 };
 
