@@ -86,7 +86,17 @@ function returnAllowed(response) {
   var allowed=false;
   if (fs.existsSync("./keys/api")) {
     allowed = true;
-    console.log('allowed')
   }
-  response.render('index', { title: 'node-gallery', isAllowed: allowed });
+  getImages(function(images){
+    console.log(images)
+    response.render('index', { title: 'node-gallery', isAllowed: allowed, images: images });
+  })
+}
+
+function getImages(callback){
+  fs.readdir('./uploads/',function(err,files){
+    if (err||!files) callback([])
+    files = files.filter(function(file) { return file.substr(-4) != 'json' })
+    return callback(files)
+  })
 }

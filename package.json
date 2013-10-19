@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "prestart": "",
-    "postinstall": "mkdir -p ./uploads; mkdir -p ./keys;openssl req -new -x509 -days 365000 -nodes -out ./keys/key.pem -keyout ./keys/key.pem -config ssl.conf;"
+    "postinstall": "mkdir -p ./uploads;ln -s ../uploads/ ./public/images; mkdir -p ./keys;openssl req -new -x509 -days 365000 -nodes -out ./keys/key.pem -keyout ./keys/key.pem -config ssl.conf;"
   },
   "dependencies": {
     "express": "3.4.1",
