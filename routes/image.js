@@ -52,7 +52,6 @@ function readExif(file) {
   }
 }
 function saveInfo(file, data) {
-  console.log(data)
   fs.writeFile("./uploads/" + file + ".json", JSON.stringify(data), function (err) {
     if (err) {
       console.log(err);
