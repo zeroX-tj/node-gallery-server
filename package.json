@@ -10,6 +10,8 @@
   "dependencies": {
     "express": "3.4.1",
     "jade": "*",
-    "http-auth": "~2.0.6"
+    "http-auth": "~2.0.6",
+    "node-uuid": "~1.4.1",
+    "exif": "git://github.com/sujal/node-exif.git"
   }
 }
