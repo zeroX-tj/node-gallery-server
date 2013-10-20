@@ -11,7 +11,7 @@ function getImages(callback){
 function addInfoToImage(file){
   var info = {id: file}
   var data = require('../uploads/' + file + '.json');
-  info.data = data
+  info.status = data.status
   return info
 }
 
