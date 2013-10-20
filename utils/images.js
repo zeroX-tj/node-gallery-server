@@ -12,6 +12,7 @@ function addInfoToImage(file){
   var info = {id: file}
   var data = require('../uploads/' + file + '.json');
   info.status = data.status
+  info.uploaded = data.uploaded
   return info
 }
 

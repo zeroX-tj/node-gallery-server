@@ -15,6 +15,9 @@ if (fs.existsSync('./keys/api')) {
 exports.list = function (req, res) {
   images.getImages(function(results){
     results = results.map(images.addInfoToImage)
+    results.sort(function(a, b){
+      return Date.parse(a.uploaded) < Date.parse(b.uploaded)
+    })
     res.json(200, results);
   })
 };
@@ -36,7 +39,7 @@ exports.save = function (req, res) {
 };
 
 function readExif(file) {
-  var info = {status: 'NotSend'}
+  var info = {status: 'NotSend', uploaded: new Date() }
   /**
    * Read EXIF data
    */
